@@ -2,5 +2,16 @@
 # http://git-scm.com/docs/gitignore
 
 node_modules/
+<<<<<<< HEAD
 platforms/
 plugins/
+=======
+.tmp
+.sass-cache
+platforms/
+plugins/
+*.swp
+*.swo
+*.log
+*.DS_Store
+>>>>>>> 17174e1abf5db1c9408af39428496d9200d62ab6

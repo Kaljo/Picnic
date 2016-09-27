@@ -1,0 +1,15 @@
+<div class="bar bar-header bar-royal">
+  <h2 class="title" style="background-color:#00818a; margin-right: 0; margin-left: 0; border-right-width: 0; border-left-width: 0; border-radius: 0; color: white; font-family:NK255; font-size:120%">My Groups</h2>
+</div>
+
+<ion-content class="has-header">
+	<ion-list>
+      <ion-item class="item-remove-animate" ng-repeat="group in my_groups" type="item-text-wrap" href="#/app/group-home/{{group.groupid}}">
+        <h2>{{group.group_name}}</h2>
+        <ion-option-button class="button-assertive" ng-click="remove(group)">
+          Leave
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

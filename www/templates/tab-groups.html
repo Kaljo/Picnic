@@ -1,0 +1,12 @@
+<div class="bar bar-header bar-royal">
+  <h2 class="title" style="background-color:#00818a; margin-right: 0; margin-left: 0; border-right-width: 0; border-left-width: 0; border-radius: 0; color: white; font-family:NK255; font-size:120%">Groups</h2>
+</div>
+
+<ion-content class="has-header">
+  <ion-list>
+      <ion-item class="item-remove-animate" type="item-text-wrap" ng-repeat="group in groups" ng-click="showPopup(group.id)">
+        <h2>{{group.name}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

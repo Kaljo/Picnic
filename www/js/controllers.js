@@ -15,6 +15,64 @@ angular.module('starter.controllers', ['ngCordova'])
 })
 
 .controller('HomeCtrl', function($scope, $http, $rootScope, $cordovaImagePicker, $ionicPlatform) {
+    
+    $rootScope.refreshHome = function(){
+
+    setTimeout(function(){
+      
+      $http.get("http://localhost/~nelipetkova/picnic/php/notifications.php?RECEIVER_ID=2")
+                .success(function (response) {$scope.notifications = response.records;});
+
+      $http.get("http://localhost/~nelipetkova/picnic/php/upcoming_events.php?id=2")
+                .success(function (response) {$scope.upcoming_events = response.records;});
+
+
+        $scope.collection = {
+            selectedImage : 'img/default_picture.png'
+        };
+     
+        $ionicPlatform.ready(function() {
+     
+            $scope.getImageSaveContact = function() {       
+                // Image picker will load images according to these settings
+                var options = {
+                    maximumImagesCount: 1, // Max number of selected images, I'm using only one for this example
+                    width: 800,
+                    height: 800,
+                    quality: 80            // Higher is better
+                };
+     
+                $cordovaImagePicker.getPictures(options).then(function (results) {
+                    // Loop through acquired images
+                    for (var i = 0; i < results.length; i++) {
+                        $scope.collection.selectedImage = results[i];   // We loading only one image so we can use it like this
+     
+                        window.plugins.Base64.encodeFile($scope.collection.selectedImage, function(base64){  // Encode URI to Base64 needed for contacts plugin
+                            $scope.collection.selectedImage = base64;
+                        });
+                    }
+                }, function(error) {
+                    console.log('Error: ' + JSON.stringify(error));    // In case of error
+                });
+            };  
+     
+        }); 
+     
+        $scope.contact = {     // We will use it to save a contact
+
+            "photos": [
+                {
+                    "type": "base64",
+                    "value": $scope.collection.selectedImage
+     
+                }
+            ]
+        };           
+
+    }, 0); 
+  };
+
+  $rootScope.refreshHome();
 
   $scope.now=new Date();
 
@@ -30,83 +88,52 @@ angular.module('starter.controllers', ['ngCordova'])
   $scope.day.setHours(17);
   $scope.day.setMinutes(0); 
 
-  $http.get("http://localhost/~nelipetkova/picnic/php/notifications.php?RECEIVER_ID=2")
-            .success(function (response) {$scope.notifications = response.records;});
-
-  $http.get("http://localhost/~nelipetkova/picnic/php/upcoming_events.php?id=2")
-            .success(function (response) {$scope.upcoming_events = response.records;});
-
-
-    $scope.collection = {
-        selectedImage : ''
-    };
- 
-    $ionicPlatform.ready(function() {
- 
-        $scope.getImageSaveContact = function() {       
-            // Image picker will load images according to these settings
-            var options = {
-                maximumImagesCount: 1, // Max number of selected images, I'm using only one for this example
-                width: 800,
-                height: 800,
-                quality: 80            // Higher is better
-            };
- 
-            $cordovaImagePicker.getPictures(options).then(function (results) {
-                // Loop through acquired images
-                for (var i = 0; i < results.length; i++) {
-                    $scope.collection.selectedImage = results[i];   // We loading only one image so we can use it like this
- 
-                    window.plugins.Base64.encodeFile($scope.collection.selectedImage, function(base64){  // Encode URI to Base64 needed for contacts plugin
-                        $scope.collection.selectedImage = base64;
-                    });
-                }
-            }, function(error) {
-                console.log('Error: ' + JSON.stringify(error));    // In case of error
-            });
-        };  
- 
-    }); 
- 
-    $scope.contact = {     // We will use it to save a contact
-
-        "photos": [
-            {
-                "type": "base64",
-                "value": $scope.collection.selectedImage
- 
-            }
-        ]
-    };           
-
 
 
 })
 
 .controller('GroupHomeCtrl', function($scope, $http, $rootScope, $stateParams) {
-  if($stateParams.id!= '')
-      $scope.groupid=$stateParams.id;
-  else if ($rootScope.last_joined != undefined)
-      $scope.groupid=$rootScope.last_joined;
-   else 
-      $scope.groupid=$rootScope.newest_group.id;
- 
-  $http.get("http://localhost/~nelipetkova/picnic/php/get_group_id.php?id=" + $scope.groupid)
-            .success(function (response) {$scope.group = response.records;});
 
+  $rootScope.refreshGroupHome = function(){
+
+    setTimeout(function(){
+      if($stateParams.id!= '')
+        $scope.groupid=$stateParams.id;
+      else if ($rootScope.last_joined != undefined)
+          $scope.groupid=$rootScope.last_joined;
+      else 
+          $scope.groupid=$rootScope.newest_group.id;
+     
+      $http.get("http://localhost/~nelipetkova/picnic/php/get_group_id.php?id=" + $scope.groupid)
+                .success(function (response) {$scope.group = response.records;});  
+
+    }, 0); 
+  };
+
+  $rootScope.refreshGroupHome();
 
 })
 .controller('GroupsCtrl', function($scope, $state, $http, $rootScope, $ionicPopup) {
 
-  $http.get("http://localhost/~nelipetkova/picnic/php/all_groups.php")
-  .success(function (response) {$rootScope.groups = response.records;});
+  $rootScope.refreshGroups = function(){
 
-  $scope.showPopup = function(id) {
+    setTimeout(function(){
+      
+      $http.get("http://localhost/~nelipetkova/picnic/php/all_groups.php")
+      .success(function (response) {$rootScope.groups = response.records;});
+
+    }, 0); 
+  };
+
+  $rootScope.refreshGroups();
+
+  $scope.showPopup = function(groupid) {
   $scope.data = {};
 
-  $scope.id = id;
+  $scope.groupid = groupid;
   // An elaborate, custom popup
   var myPopup = $ionicPopup.show({
+
     template: '<input type="password" ng-model="data.password">',
     title: 'Enter Group Password',
     scope: $scope,
@@ -120,14 +147,22 @@ angular.module('starter.controllers', ['ngCordova'])
             //don't allow the user to close unless he enters wifi password
             e.preventDefault();
           } else {    
-            $http.get("http://localhost/~nelipetkova/picnic/php/join_group.php?P=" + $scope.data.password + "&GROUPID=" + id + "&USERID="+ $rootScope.id + "")
+            $http.get("http://localhost/~nelipetkova/picnic/php/join_group.php?P='" + $scope.data.password + "'&GROUPID=" + $scope.groupid + "&USERID="+ $rootScope.id + "")
             .success(function (response) {$scope.resu = response.records;
               if($scope.resu.ok == '1'){
-              $rootScope.last_joined = $scope.id;
+              $rootScope.last_joined = $scope.groupid;
+
+              if(typeof $rootScope.refreshGroups == 'function')
+                $rootScope.refreshGroups();
+              if(typeof $rootScope.refreshMyGroups == 'function')
+                $rootScope.refreshMyGroups();
+              if(typeof $rootScope.refreshGroupHome == 'function')
+                $rootScope.refreshGroupHome();
+
               $state.go('app.group-home');
             }
             else{
-              $scope.showPopup1(id);
+              $scope.showPopup1(groupid);
             }
             });
 
@@ -146,7 +181,7 @@ angular.module('starter.controllers', ['ngCordova'])
  };
 
    
-  $scope.showPopup1 = function(id) {
+  $scope.showPopup1 = function(groupid) {
   $scope.data = {};
 
   // An elaborate, custom popup
@@ -165,14 +200,22 @@ angular.module('starter.controllers', ['ngCordova'])
             //don't allow the user to close unless he enters wifi password
             e.preventDefault();
           } else {    
-            $http.get("http://localhost/~nelipetkova/picnic/php/join_group.php?P=" + $scope.data.password + "&GROUPID=" + id + "&USERID="+ $rootScope.id + "")
+            $http.get("http://localhost/~nelipetkova/picnic/php/join_group.php?P=" + $scope.data.password + "&GROUPID=" + $scope.groupid + "&USERID="+ $rootScope.id + "")
             .success(function (response) {$scope.resu = response.records;
               if($scope.resu.ok == '1'){
-              $rootScope.last_joined = $scope.id;
+              $rootScope.last_joined = $scope.groupid;
+
+              if(typeof $rootScope.refreshGroups == 'function')
+                $rootScope.refreshGroups();
+              if(typeof $rootScope.refreshMyGroups == 'function')
+                $rootScope.refreshMyGroups();
+              if(typeof $rootScope.refreshGroupHome == 'function')
+                $rootScope.refreshGroupHome();
+
               $state.go('app.group-home');
             }
             else{
-              $scope.showPopup1(id);
+              $scope.showPopup1(groupid);
             }
             });            
           }
@@ -191,8 +234,17 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('MyGroupsCtrl', function( $scope, $http, $rootScope) {
 
-  $http.get("http://localhost/~nelipetkova/picnic/php/my_groups.php?id=" + $rootScope.id)
-  .success(function (response) {$scope.my_groups = response.records;});
+  $rootScope.refreshMyGroups = function(){
+
+    setTimeout(function(){
+      
+      $http.get("http://localhost/~nelipetkova/picnic/php/my_groups.php?id=" + $rootScope.id)
+      .success(function (response) {$scope.my_groups = response.records;});
+
+    }, 0); 
+  };
+
+  $rootScope.refreshMyGroups();
 
   $scope.remove = function(group) {
     //Users.remove(group);
@@ -247,8 +299,15 @@ angular.module('starter.controllers', ['ngCordova'])
 
    $scope.addGroup = function (data) {
 
-      $http.get("http://localhost/~nelipetkova/picnic/php/new_group.php?name=" + $scope.data.name + "&password=" + $scope.data.password + "&location=" + $scope.data.location + "&date=" + $scope.data.date + "&userid=2" + "")
+      $http.get("http://localhost/~nelipetkova/picnic/php/new_group.php?name=" + $scope.data.name + "&password=" + $scope.data.password + "&location=" + $scope.data.location + "&date=" + $scope.data.date + "&userid=" + $rootScope.id +"")
       .success(function (response) {
+          if(typeof $rootScope.refreshGroups == 'function')
+                $rootScope.refreshGroups();
+          if(typeof $rootScope.refreshMyGroups == 'function')
+                $rootScope.refreshMyGroups();
+          if(typeof $rootScope.refreshGroupHome == 'function')
+                $rootScope.refreshGroupHome();
+
           $rootScope.newest_group = response.records;
           $state.go('app.group-home');
       });

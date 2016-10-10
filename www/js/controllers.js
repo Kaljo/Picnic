@@ -1,3 +1,12 @@
+/*
+************************
+UNCOMMENT databaseUrl VARIABLE WITH YOUR PATH TO DATABASE TO WORK
+ALSO CHANGE CREDENTIALS IN db.php
+
+databaseUrl VARIABLE IS DECLARED AT THE BOTTOM OF THIS FILE
+
+*/
+
 angular.module('starter.controllers', ['ngCordova'])
 
 .controller('AppCtrl', function($scope, $http, $rootScope) {
@@ -16,6 +25,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('HomeCtrl', function($scope, $http, $rootScope, $cordovaImagePicker, $ionicPlatform) {
     
+    console.log($rootScope.id);
     $rootScope.refreshHome = function(){
 
     setTimeout(function(){
@@ -343,6 +353,29 @@ angular.module('starter.controllers', ['ngCordova'])
        $state.go('app.home');
   };       
   
+})
+
+.controller('LoginCtrl', function($scope, $rootScope, $http, $state){
+
+  $scope.data = {
+    email: '',
+    password: ''
+  };
+
+  $scope.login = function(){
+    console.log('login called');
+    $http.get(databaseUrl + "php/login.php?EMAIL=" + $scope.data.email)
+      .success(function(response){
+        $rootScope.id = response.records.id;
+        $state.go('app.home');
+      })
+      .error(function(response){
+        console.log('error');
+        //should show message and stay on same page
+      });
+
+  }
+
 });
 
 //Kaljo's database location

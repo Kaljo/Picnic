@@ -18,7 +18,7 @@ if (isset($_GET['EMAIL']))
 	    $outp .= '"pic":"'   . $rs["pic"] . '"}';
 	       
 	}
-	$outp = '{ "records":'.$outp.'}';
+	$outp = '{ "records":['.$outp.']}';
 	$conn->close();
 	echo($outp);
  }

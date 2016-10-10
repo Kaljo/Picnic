@@ -6,7 +6,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('UsersCtrl', function($scope, $http, $rootScope) {
 
-  $http.get("http://localhost/~nelipetkova/picnic/php/all_users.php")
+  $http.get(databaseUrl + "php/all_users.php")
   .success(function (response) {$rootScope.users = response.records;});
 
   $scope.remove = function(user) {
@@ -20,10 +20,10 @@ angular.module('starter.controllers', ['ngCordova'])
 
     setTimeout(function(){
       
-      $http.get("http://localhost/~nelipetkova/picnic/php/notifications.php?RECEIVER_ID=2")
+      $http.get(databaseUrl + "php/notifications.php?RECEIVER_ID=2")
                 .success(function (response) {$scope.notifications = response.records;});
 
-      $http.get("http://localhost/~nelipetkova/picnic/php/upcoming_events.php?id=2")
+      $http.get(databaseUrl + "php/upcoming_events.php?id=2")
                 .success(function (response) {$scope.upcoming_events = response.records;});
 
 
@@ -104,7 +104,7 @@ angular.module('starter.controllers', ['ngCordova'])
       else 
           $scope.groupid=$rootScope.newest_group.id;
      
-      $http.get("http://localhost/~nelipetkova/picnic/php/get_group_id.php?id=" + $scope.groupid)
+      $http.get(databaseUrl + "php/get_group_id.php?id=" + $scope.groupid)
                 .success(function (response) {$scope.group = response.records;});  
 
     }, 0); 
@@ -119,7 +119,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
     setTimeout(function(){
       
-      $http.get("http://localhost/~nelipetkova/picnic/php/all_groups.php")
+      $http.get(databaseUrl + "php/all_groups.php")
       .success(function (response) {$rootScope.groups = response.records;});
 
     }, 0); 
@@ -147,7 +147,7 @@ angular.module('starter.controllers', ['ngCordova'])
             //don't allow the user to close unless he enters wifi password
             e.preventDefault();
           } else {    
-            $http.get("http://localhost/~nelipetkova/picnic/php/join_group.php?P='" + $scope.data.password + "'&GROUPID=" + $scope.groupid + "&USERID="+ $rootScope.id + "")
+            $http.get(databaseUrl + "php/join_group.php?P='" + $scope.data.password + "'&GROUPID=" + $scope.groupid + "&USERID="+ $rootScope.id + "")
             .success(function (response) {$scope.resu = response.records;
               if($scope.resu.ok == '1'){
               $rootScope.last_joined = $scope.groupid;
@@ -200,7 +200,7 @@ angular.module('starter.controllers', ['ngCordova'])
             //don't allow the user to close unless he enters wifi password
             e.preventDefault();
           } else {    
-            $http.get("http://localhost/~nelipetkova/picnic/php/join_group.php?P=" + $scope.data.password + "&GROUPID=" + $scope.groupid + "&USERID="+ $rootScope.id + "")
+            $http.get(databaseUrl + "php/join_group.php?P=" + $scope.data.password + "&GROUPID=" + $scope.groupid + "&USERID="+ $rootScope.id + "")
             .success(function (response) {$scope.resu = response.records;
               if($scope.resu.ok == '1'){
               $rootScope.last_joined = $scope.groupid;
@@ -232,14 +232,18 @@ angular.module('starter.controllers', ['ngCordova'])
   
 })
 
-.controller('MyGroupsCtrl', function( $scope, $http, $rootScope) {
+.controller('MyGroupsCtrl', function( $scope, $http, $rootScope, $log) {
+
+  $log.info($rootScope.id);
 
   $rootScope.refreshMyGroups = function(){
 
     setTimeout(function(){
       
-      $http.get("http://localhost/~nelipetkova/picnic/php/my_groups.php?id=" + $rootScope.id)
-      .success(function (response) {$scope.my_groups = response.records;});
+      $http.get(databaseUrl + "php/my_groups.php?id=" + $rootScope.id)
+        .success(function (response) {
+          $scope.my_groups = response.records;
+        });
 
     }, 0); 
   };
@@ -254,7 +258,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('UserDetailCtrl', function($rootScope, $scope, $stateParams, $http) {
   $scope.id = $stateParams.id;
-  $http.get("http://localhost/~nelipetkova/picnic/php/get.php?id=" + $scope.id)
+  $http.get(databaseUrl + "php/get.php?id=" + $scope.id)
   .success(function (response) {$scope.user_detail = response.records;});
 })
 
@@ -299,7 +303,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
    $scope.addGroup = function (data) {
 
-      $http.get("http://localhost/~nelipetkova/picnic/php/new_group.php?name=" + $scope.data.name + "&password=" + $scope.data.password + "&location=" + $scope.data.location + "&date=" + $scope.data.date + "&userid=" + $rootScope.id +"")
+      $http.get(databaseUrl + "php/new_group.php?name=" + $scope.data.name + "&password=" + $scope.data.password + "&location=" + $scope.data.location + "&date=" + $scope.data.date + "&userid=" + $rootScope.id +"")
       .success(function (response) {
           if(typeof $rootScope.refreshGroups == 'function')
                 $rootScope.refreshGroups();
@@ -326,9 +330,9 @@ angular.module('starter.controllers', ['ngCordova'])
   
    $scope.register = function (data) {
 
-      $http.get("http://localhost/~nelipetkova/picnic/php/register.php?EMAIL=" + $scope.data.email + "")
+      $http.get(databaseUrl + "php/register.php?EMAIL=" + $scope.data.email + "")
       .success(function () {
-            $http.get("http://localhost/~nelipetkova/picnic/php/get_email.php?EMAIL='" + $scope.data.email + "'")
+            $http.get(databaseUrl + "php/get_email.php?EMAIL='" + $scope.data.email + "'")
             .success(function (response) {$scope.user = response.records;
                                           $rootScope.id = $scope.user.id;
                                           $rootScope.email = $scope.user.email;});
@@ -340,3 +344,8 @@ angular.module('starter.controllers', ['ngCordova'])
   };       
   
 });
+
+//Kaljo's database location
+var databaseUrl = "http://localhost:8080/Picnic/";
+//Neli's database location
+//var databaseUrl = "http://localhost/~nelipetkova/picnic/";

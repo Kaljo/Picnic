@@ -10,6 +10,8 @@
 <div class="pozdrav" ng-show="now>day || morning1>now">Good evening, {{email}}!</div>
 <div class="notifikacije">notifications</div>
 
+
+<!-- da se doda koliko meni neko duguje -->
 <div class="list card">
       <ion-item class="item" ng-repeat="n in notifications |limitTo: -3 |orderBy:'notification_id':true" style="font-size: 90%;" href="#/tab/groups/{{group.id}}">
                            <div ng-show="{{n.money_amount}}">You owe {{n.sender_email}} {{n.money_amount}}€ for {{n.group_name}}!!</div>

@@ -25,7 +25,6 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('HomeCtrl', function($scope, $http, $rootScope, $cordovaImagePicker, $ionicPlatform) {
     
-    console.log($rootScope.id);
     $rootScope.refreshHome = function(){
 
     setTimeout(function(){
@@ -341,16 +340,20 @@ angular.module('starter.controllers', ['ngCordova'])
    $scope.register = function (data) {
 
       $http.get(databaseUrl + "php/register.php?EMAIL=" + $scope.data.email + "")
-      .success(function () {
-            $http.get(databaseUrl + "php/get_email.php?EMAIL='" + $scope.data.email + "'")
-            .success(function (response) {$scope.user = response.records;
-                                          $rootScope.id = $scope.user.id;
-                                          $rootScope.email = $scope.user.email;});
+      .success(function (response) {
 
-            
+            $rootScope.id = response.id;
+            $rootScope.email = $scope.data.email;
             $state.go('app.home');
+            /*$http.get(databaseUrl + "php/get_email.php?EMAIL='" + $scope.data.email + "'")
+            .success(function (response) {
+              //$scope.user = response.records;
+              $rootScope.id = response.records.id;
+              $rootScope.email = response.records.email;
+              $state.go('app.home');
+            });*/
+
       });
-       $state.go('app.home');
   };       
   
 })

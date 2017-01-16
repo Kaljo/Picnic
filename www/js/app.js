@@ -27,21 +27,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     templateUrl: 'templates/tabs.html'
   })
 
-  .state('app', {
+      .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
-  })
-
-  .state('tab.login', {
-    url: '/login',
-    views: {
-      'tab-login': {
-        templateUrl: 'templates/login.html',
-        controller: 'LoginCtrl'
-      }
-    }  
   })
 
   .state('tab.register', {
@@ -53,8 +43,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }  
   })
-
-
 
   .state('app.users', {
       url: '/users',

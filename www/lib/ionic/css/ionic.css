@@ -1,159 +1,3 @@
-@font-face {
-  font-family: "nk255";
-  src: url('../fonts/NK255.otf') format('opentype');
-  
-}
-@font-face {
-  font-family: "MISTRAL";
-  src: url('../fonts/MISTRAL.TTF') format('truetype');
-}
-@font-face {
-  font-family: "LithosPro";
-  src: url('../fonts/LithosPro-Regular.otf') format('opentype');
-}
-.bar.bar-positive {
-  background-color: #75042f !important;
-  border-color: #75042f !important;
-}
-
-.bar.bar-assertive {
-  background-color: #75042f !important;
-  border-color: #75042f !important;
-}
-
-ion-side-menu-content {
-  box-shadow: rgb(41, 41, 41) -1px 0px 6px 0px !important;
-}
-
-.toggle input:checked + .track {
-  background-color: #75042f !important;
-  border-color: #75042f !important;
-}
-.menu.menu-left{
-  width: calc(100% - 70px) !important;
-}
-.menu-open .menu-content{
-  transform: translate3d(80px, 0px, 0px) !important;
-}
-.razmak1 {
-  height:70px;
-}
-.razmak2 {
-  height:70px;
-}
-.razmak3 {
-  height:70px;
-}
-.razmak4 {
-  height:70px;
-}
-.dark {
-  background-image: url("../background3.png"); !important;
-  color: white;
-  font-family: NK255;
-  
-}
-
-
-/*Set the background to transparent for ion-item*/
-.dark .item {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size:100%;
-}
-
-/*Changes the border for the last item*/
-
-
-/*Ion-item adds item-complex and an inner div, .item-content*/
-/* this needs to be transparent too, but doesnt need borders*/
-.dark .item-complex .item-content, .dark .item-radio .item-content {
-  background-color: transparent;
-}
-
-
-/*Just makes the type white*/
-.dark h2,
-.dark h3,
-.dark p,
-.dark a {
-  color: #F0F1F1;
-}
-
-.fotka {
-  
-}
-.pozdrav {
-    color:white;
-    margin-top:4%;
-    margin-left:21%;
-    font-size: 140%;
-    font-family: "LithosPro";
-}
-.notifikacije {
-    color:white;
-    margin-top:8%;
-    margin-left:10px;
-    font-size: 100%;
-    font-family: NK255;
-    opacity: 0.75;
-}
-.chushka{
-    margin-left: 34%;
-    margin-right: 34%;
-} 
-.round {                
-    display: inline-block;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 120px;
-    height: 120px;
-    border: 3px solid white;
-}
-.round img {
-    min-width: 100%;
-    min-height: 100%;
-}
-
-.upisivanje {
-   position:relative;   
-   background:none;
-   color:white;
-   margin-top:55%;
-   margin-left:39%;
-   border: white;
-
-   
-}
-
-.pack2 {
-   position:relative;
-    padding-top: 6%;
-    padding-left:34%;
-}
-.pack1 {
-  font-size: 100%;
-  border-bottom-color: white;
-}
-
-.bod {
-    background-image: url("../background2.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:fixed;
-    overflow: hidden;
-    
-}
-.bod2 {
-    background-image: url("../background3.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:fixed;
-    
-}
-
-
 @charset "UTF-8";
 /*!
  * Copyright 2015 Drifty Co.
@@ -183,9 +27,7 @@ ion-side-menu-content {
   font-family: "Ionicons";
   src: url("../fonts/ionicons.eot?v=2.0.1");
   src: url("../fonts/ionicons.eot?v=2.0.1#iefix") format("embedded-opentype"), url("../fonts/ionicons.ttf?v=2.0.1") format("truetype"), url("../fonts/ionicons.woff?v=2.0.1") format("woff"), url("../fonts/ionicons.woff") format("woff"), url("../fonts/ionicons.svg?v=2.0.1#Ionicons") format("svg");
-  src: url('../fonts/MISTRAL.TTF') format('truetype'); 
-  src: url('../fonts/NK255.otf') format('opentype');
-   font-weight: normal;
+  font-weight: normal;
   font-style: normal; }
 
 .ion, .ionicons,
@@ -3149,11 +2991,7 @@ ion-side-menu-content {
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
-del, dfn, em, 
-
-
-
-, ins, kbd, q, s, samp,
+del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, i, u, center,
 dl, dt, dd, ol, ul, li,
@@ -3499,7 +3337,7 @@ body,
   font-size: 14px;
   font-family: -apple-system;
   font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
-  line-height: 4px;
+  line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
   -webkit-user-drag: none;
@@ -4069,7 +3907,7 @@ a.subdued {
     .bar.bar-clear .title {
       color: #fff; }
   .bar.item-input-inset .item-input-wrapper {
-    margin-top: 0px; }
+    margin-top: -1px; }
     .bar.item-input-inset .item-input-wrapper input {
       padding-left: 8px;
       width: 94%;
@@ -4165,9 +4003,8 @@ a.subdued {
     z-index: 0;
     overflow: hidden;
     margin: 0 10px;
-    min-width: 40px;
-    height: 100px;
-    width:100;
+    min-width: 30px;
+    height: 43px;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -5433,9 +5270,8 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   overflow: hidden;
   min-height: 100%;
   max-height: 100%;
-  width: 20%;
-  background-color: #fff;
-  padding-top: 50px; }
+  width: 275px;
+  background-color: #fff; }
   .menu .scroll-content {
     z-index: 10; }
   .menu .bar-header {
@@ -5444,8 +5280,7 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
 .menu-content {
   -webkit-transform: none;
   transform: none;
-
-  box-shadow: -1px 0px 2px rgba(255, 0, 0, 0.2), 1px 5px 2px rgba(0, 0, 0, 0.2); }
+  box-shadow: -1px 0px 2px rgba(0, 0, 0, 0.2), 1px 0px 2px rgba(0, 0, 0, 0.2); }
 
 .menu-open .menu-content .pane,
 .menu-open .menu-content .scroll-content {
@@ -5466,7 +5301,7 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   left: -1px;
   border-right: 1px solid #ccc;
   border-left: 1px solid #ccc;
-  box-shadow:none; }
+  box-shadow: none; }
 
 .menu-left {
   left: 0; }
@@ -6568,7 +6403,6 @@ button.item.item-button-right {
   min-height: 30px;
   background-color: #f5f5f5;
   color: #222;
-  padding: 8px;
   font-weight: 500; }
 
 .platform-ios .item-divider-platform,
@@ -6739,7 +6573,7 @@ button.item.item-button-right {
     z-index: 9; }
 
 .item-placeholder {
-  opacity: 1; }
+  opacity: 0.7; }
 
 /**
  * The hidden right-side buttons that can be exposed under a list item
@@ -6774,24 +6608,15 @@ button.item.item-button-right {
  */
 .list {
   position: relative;
-  padding-top: 75px;
+  padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 0;
-  margin-bottom: 20px;
-   }
+  margin-bottom: 20px; }
 
 .list:last-child {
   margin-bottom: 0px; }
-  .list.card {
-    margin-bottom: 3px;
-    margin-left:10px;
-    margin-right:10px;
-    opacity: 0.4;
-    font-family: "NK255";
-    font-size:90%;
-    margin-top:12px;
-     }
-
+  .list:last-child.card {
+    margin-bottom: 40px; }
 
 /**
  * List Header
@@ -6823,7 +6648,7 @@ button.item.item-button-right {
 .card {
   padding-top: 1px;
   padding-bottom: 1px;
-  box-shadow: 0 11px 13px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
   .card .item {
     border-left: 0;
     border-right: 0; }
@@ -7694,7 +7519,7 @@ ion-slides {
  * --------------------------------------------------
  */
 form {
-  margin: 0 0 0; }
+  margin: 0 0 1.42857; }
 
 legend {
   display: block;
@@ -7715,17 +7540,14 @@ button,
 select,
 textarea {
   font-weight: normal;
-  font-size: 4px;
-  line-height: 1.42857;
-   }
+  font-size: 14px;
+  line-height: 1.42857; }
 
 input,
 button,
 select,
 textarea {
-  font-family: "NK255";
-  
-  }
+  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
 
 .item-input {
   display: -webkit-box;
@@ -7741,8 +7563,7 @@ textarea {
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding: 6px 0 5px 16px;
-   }
+  padding: 6px 0 5px 16px; }
   .item-input input {
     -webkit-border-radius: 0;
     border-radius: 0;
@@ -7757,8 +7578,7 @@ textarea {
     appearance: none;
     margin: 0;
     padding-right: 24px;
-    background-color: transparent;
-     }
+    background-color: transparent; }
   .item-input .button .icon {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 24px;
@@ -7915,12 +7735,12 @@ input[type="search"],
 input[type="tel"],
 input[type="color"] {
   display: block;
-  padding-top: 0px;
+  padding-top: 2px;
   padding-left: 0;
   height: 34px;
-  color: white;
+  color: #111;
   vertical-align: middle;
-  font-size: 200%;
+  font-size: 14px;
   line-height: 16px; }
 
 .platform-ios input[type="datetime-local"],
@@ -7947,11 +7767,10 @@ textarea {
     color: #aaaaaa; }
   textarea::-webkit-input-placeholder {
     color: #aaaaaa;
-     }
+    text-indent: -3px; }
 
 textarea {
-  height: auto;
-   }
+  height: auto; }
 
 textarea,
 input[type="text"],
@@ -7968,9 +7787,7 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 input[type="color"] {
-  border: 0;
-  font-size: 140%;
-   }
+  border: 0; }
 
 input[type="radio"],
 input[type="checkbox"] {
@@ -7998,33 +7815,16 @@ input[type="file"] {
 
 input::-moz-placeholder,
 textarea::-moz-placeholder {
-  color: white;
-  font-family: NK255;
-  font-size: 90%;
-  
-
-  }
+  color: #aaaaaa; }
 
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-  color: white; 
-font-family: NK255;
-font-size: 90%;
-
-
-  
-}
+  color: #aaaaaa; }
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-  color: white;
-  text-indent: 0;
-  font-family: NK255;
-  font-size: 90%;
-  
-  ;
-
-   }
+  color: #aaaaaa;
+  text-indent: 0; }
 
 input[disabled],
 select[disabled],

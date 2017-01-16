@@ -1,17 +1,19 @@
-<ion-view class="bod2">
+<ion-view class="body2">
 <ion-content class="has-header">
-<div class="chushka"><div class="round">
-	<img ng-src="{{collection.selectedImage}}" style="width: 100px; height: 100px opacity:0.8; position:relative; "></img>
-</div></div>
+<div class="avatar">
+	<div class="round">
+		<img ng-src="{{collection.selectedImage}}"></img>
+	</div>
+</div>
 
-<button class="button button-clear" ng-click="getImageSaveContact();"style="margin-left:32%;margin-top:-7%;"><img src="img/camera.png" style="width : 13% ; height : auto; "></button>
-<div class="pozdrav" ng-show="now>morning1 && morning2>now">Good morning, {{email}}!</div>
-<div class="pozdrav" ng-show="now>morning2 && day>now">Good afternoon, {{email}}!</div>
-<div class="pozdrav" ng-show="now>day || morning1>now">Good evening, {{email}}!</div>
-<div class="notifikacije">notifications</div>
+<button class="button button-clear camera" ng-click="getImageSaveContact();"><img src="img/camera.png" style="width: 13%; height: auto;"></button>
 
+<div class="greeting" ng-show="now>morning1 && morning2>now">Good morning, {{email}}!</div>
+<div class="greeting" ng-show="now>morning2 && day>now">Good afternoon, {{email}}!</div>
+<div class="greeting" ng-show="now>day || morning1>now">Good evening, {{email}}!</div>
 
-<!-- da se doda koliko meni neko duguje -->
+<div class="card_title">notifications</div>
+
 <div class="list card">
       <ion-item class="item" ng-repeat="n in notifications |limitTo: -3 |orderBy:'notification_id':true" style="font-size: 90%;" href="#/tab/groups/{{group.id}}">
                            <div ng-show="{{n.money_amount}}">You owe {{n.sender_email}} {{n.money_amount}}€ for {{n.group_name}}!!</div>
@@ -19,7 +21,8 @@
       </ion-item>
   
 </div>
-  <div class="notifikacije">upcomming events</div>
+
+<div class="card_title">upcomming events</div>
 <div class="list card">
   <ion-item class="item" ng-repeat="e in upcoming_events |limitTo: 3" style="font-size: 90%;" href="#/tab/groups/{{group.id}}">
                            {{e.group_name}} on {{e.date}}!

@@ -41,6 +41,17 @@ CREATE TABLE notifications (
   FOREIGN KEY(group_id) REFERENCES groups(id)
 ); 
 
+CREATE TABLE products (
+productID int(11) AUTO_INCREMENT,
+productName varchar (30),
+productPrice DECIMAL(15,2),
+buyer_userID int(11),
+groupID int(11),
+PRIMARY KEY(productID),
+FOREIGN KEY(buyer_userID) REFERENCES users(id),
+FOREIGN KEY(groupID) REFERENCES groups(id));
+
+
 CREATE VIEW notify AS(
 SELECT n.id AS notification_id,receiver_id, type, money_amount, g.name AS group_name, u1.email AS sender_email, u2.email AS receiver_email
 FROM notifications n 

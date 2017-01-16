@@ -3,9 +3,9 @@
 include "db.php";
 
 
-if (isset($_GET['name']) && isset($_GET['password']) && isset($_GET['userid'])  && isset($_GET['location']) && isset($_GET['date']))
+if (isset($_GET['name']) && isset($_GET['password']) && isset($_GET['userid'])  && isset($_GET['location']) && isset($_GET['date']) && isset($_GET['description']) )
  {
-	 $sql = "INSERT INTO groups (name,password,location,date) VALUES ('". $_GET['name'] ."','". $_GET['password'] ."','". $_GET['location'] ."','". $_GET['date'] ."')";
+	 $sql = "INSERT INTO groups (name,password,location,date,description) VALUES ('". $_GET['name'] ."','". $_GET['password'] ."','". $_GET['location'] ."','". $_GET['date'] ."','". $_GET['description'] ."')";
 	 if ($conn->query($sql) === TRUE) {
 	    echo "";
 	 } else {

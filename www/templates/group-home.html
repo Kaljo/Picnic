@@ -1,9 +1,90 @@
-<div class="bar bar-header bar-royal">
-  <h2 class="title">{{group.name}}</h2>
+<div class="bar bar-header">
+  <h2 class="title top">{{group.name}}</h2>
 </div>
-  <ion-content class="has-header">
-        <h2>{{group.name}}</h2> 
-        <h5><b>Date:</b> {{group.date}}</h5>
-        <h5><b>Location:</b> {{group.location}}</h5>
+  <ion-content scroll="true">
+  	<ion-slides  options="options" slider="data.slider">
+    	<ion-slide-page class="slide1">
+			<div class="locat"><h5><b>Location:</b> {{group.location}}</h5></div>
+			<div id="map" data-tap-disabled="true" class="map-custom"></div>
+			
+			
+			
+				<div class="button button-outline button-stable register_button button-custom-3" style="position:fixed; top:50%; left:17%; padding:2%; width:33%;">Host: {{admin.user_email}}</div>    	
+				<div class="button button-outline button-stable register_button button-custom-3" style="position:fixed; top:50%; left:53%; padding:2%; width:33%;">{{group.date}}</div>
+			
+				<div class="button button-outline button-stable register_button button-custom-3" style="position:fixed; top:65%; left:17%; padding:2%; width:33%;" ng-click="openPopover($event)">Description</div>
+				<div class="button button-outline button-stable register_button button-custom-3" style="position:fixed; top:65%; left:53%; padding:2%; width:33%;" ng-click="openPopover2($event)">Members({{nr_members}})</div>
+			
+			
+			
+       <!-- <ion-item class="item" type="item-text-wrap" style="font-size:90%;" ng-repeat="m in members">
+        	<h5>{{m.user_email}}</h5>
+      	</ion-item> -->
+      		<script id="my-popover2.html" type="text/ng-template">
+ 				 <ion-popover-view>
+    				
+    				<ion-content class="popup-custom">
+      					<ion-item class="item" type="item-text-wrap" style="font-size:90%;" ng-repeat="m in members">
+        					<h5>{{m.user_email}}</h5>
+      					</ion-item>
+    				</ion-content>
+  				 </ion-popover-view>
+			</script>
+			<script id="my-popover.html" type="text/ng-template">
+ 				 <ion-popover-view>
+    				
+    				<ion-content class="popup-custom">
+      					{{group.description}}
+    				</ion-content>
+  				 </ion-popover-view>
+			</script>
+        	
+		</ion-slide-page>
+	 	<ion-slide-page class="slide2">
+			
+      		<div class="box-yellow"><h2 style="color:white"><b>Products</b></h2></div>
+	
+  	<ion-content scroll="true">
+    <input type="text" placeholder="Product name" style="position:relative; top:15%; left:10%; color:black; padding-left:4%;" ng-model="data.productName">
+    <button class="ion-plus-round" style="padding:10px; font-size:160%;" ng-click="addProduct();">
+      
+      
+    </button>
+			
+  				<div   class="list card" style="opacity:0.8;display:block; margin-top:30%; left:7.5%; margin-right:75px; position:relative;"> 
+		
+		<ion-item class="item" type="item-text-wrap" style="font-size:90%; background-color:#00818a; color:white;" ng-repeat="p in products">  		
+		<button class="basket" style="float:right; display:inline-block; width:18%;height:auto; opacity:1; border:none; background-color:transparent;" ng-click="setBuyer(p.productID);"><img src="img/korpa_white.png"></button><span class="right">{{p.productName}}</span>    
+		 
+		</ion-item> 
+      </div>
+
+	  		<div   class="list card" style="opacity:0.75; left:7.5%; display:block; margin-right:75px; position:relative;"> 
+		<ion-item class="item" type="item-text-wrap" style="font-size:90%; color:white; background-color:#04B4AE;" ng-repeat="prod in products_reserved">
+		<button class="ion-minus-circled" style="padding-bottom: -7px; float:right; display:inline-block; font-size:190%; opacity:1; border:none; background-color:transparent; color:white;" ng-click="unsetBuyer(prod.productID);" ng-show="id==prod.buyer_userid"></button>
+		<span class="right">{{prod.email}} will buy {{prod.productName}} for {{prod.productPrice}}.</span>
+	
+		</ion-item>
+      </div>
+
+
+		
+		</ion-content> 
+		
+    	</ion-slide-page>
+    	<ion-slide-page class="slide3">
+      		 <button class="button button-outline button-dark rounded-a">
+  				Total: {{ total }}
+			 </button>
+				<button class="rounded-b" ng-click="calculate();">Calculate</button>
+			<div   class="list card" style="opacity:0.75; left:7.5%; display:block; margin-right:75px; position:relative;"> 
+				<ion-item class="item" type="item-text-wrap" style="font-size:90%;" ng-repeat="m in messages">  
+           {{m}}
+          </ion-item>
+			</div>
+    	</ion-slide-page>
+  	</ion-slides>
   </ion-content>
 </ion-view>
+
+

@@ -5,35 +5,33 @@
       </ion-nav-back-button>
 
       <ion-nav-buttons side="left">
-        <button  class="button button-clear" menu-toggle="left" style="width : 50% ; height : auto; opacity:1"> <img src="img/korpa_white.png" style="width : 78% ; height : auto">
+        <button  class="button button-clear basket" menu-toggle="left"> 
+            <img src="img/korpa_white.png" style="width: 78%; height: auto;">
         </button>
-          <div class="list"></div>
-
       </ion-nav-buttons>
+
     </ion-nav-bar>
+
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
     <ion-header-bar class="bar-stable">
-      <h1 class="title" style="background-color:#00818a; margin-right: 0; margin-left: 0; border-right-width: 0; border-left-width: 0; border-radius: 0; color: white; font-family:NK255; font-size:120%"><img src="../img/logo.png" style="height: 80%; width:auto; position:relative;top:7%;"></h1>
+      <h1 class="title top"><img src="../img/logo.png" style="height: 80%; width:auto; position:relative; top:7%;"></h1>
     </ion-header-bar>
+
     <ion-content class="dark">
-      <div>
       <ion-list class="list">
-        <ion-item class="razmak1" menu-close href="#/app/home">
-          
-          <img src="img/home.png" style="position:relative;height:auto%; left: 2%; width:16%;">
-        
-        </ion-item>
-        
-        <ion-item class="razmak2" menu-close href="#/app/my_groups">
+        <ion-item class="sec" menu-close href="#/app/home">      
+          <img src="img/home.png" style="position:relative;height:auto%; left: 2%; width:16%;">  
+        </ion-item>       
+        <ion-item class="sec" menu-close href="#/app/my_groups">
           <img src="img/my.png" style="position:relative;height:auto%; width:20%;">
         </ion-item>
-        <ion-item class="razmak3" menu-close href="#/app/groups">
+        <ion-item class="sec" menu-close href="#/app/groups">
           <img src="img/search.png" style="position:relative;height:auto%; width:20%;">
         </ion-item>
-        <ion-item class="razmak4" menu-close href="#/app/new_group">
+        <ion-item class="sec" menu-close href="#/app/new_group">
           <img src="img/plus.png" style="position:relative;height:auto%; width:18%;">
         </ion-item>
       </ion-list>

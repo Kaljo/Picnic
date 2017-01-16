@@ -30,4 +30,7 @@ INSERT INTO `notifications` (`id`, `type`, `money_amount`, `sender_id`, `receive
 (4, 'invitation', 0, 1, 2, 3),
 (5, 'debt', 100, 87, 2, 2);
 
+INSERT INTO products(buyer_userID,groupID,productPrice,productName)
+VALUES(1, 11, 19.54, 'kokakola')
+
 

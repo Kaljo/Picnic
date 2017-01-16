@@ -1,18 +1,20 @@
-<ion-view class="bod">
+<ion-view class="body1">
   <ion-content>
       <img src="img/logo.png" style="margin-left: 28%; margin-top:45%; position: relative; width: 43%; height: auto;"></img>
 
        <form ng-submit>
           <div class="pack1">
-                  <input class="upisivanje" style="height: 58%;" type="text" placeholder="Pick a Nick" ng-model="data.email" maxlength="18" required>
+                  <input class="inputfield_register" type="text" placeholder="Pick a Nick" ng-model="data.email" maxlength="18" required>
+				  <input class="inputfield_register_password" type="text" placeholder="Password" ng-model="data.password" maxlength="18" required>
           </div>
               
           <div class="pack2">
-              <button class="button button-outline button-stable" style="color:white; border-color:white; position:relative; width:50%;height:auto; font-size:120%; font-family:'nk255';" ng-click="register(data)">Register</button>
+              <button class="button button-outline button-stable register_button" ng-click="login(data)">Login</button>
+					
+			  <button class="button button-outline button-stable register_button" style="top:90%; left:26%; position:fixed;" ng-click="register(data)">Register</button>
           </div>
         </form>
-        
-        <a class = "button" href="#/tab/login">Already have an account?</a>
+
   </ion-content>
 </ion-view>
 

@@ -108,7 +108,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
 })
 
-.controller('GroupHomeCtrl', function($scope, $state, $http, $rootScope, $stateParams, $ionicPopover, $cordovaGeolocation, $ionicPopup) {
+.controller('GroupHomeCtrl', function($scope, $timeout, $state, $http, $rootScope, $stateParams, $ionicPopover, $cordovaGeolocation, $ionicPopup) {
 	 $scope.data = {
     productName: ''
   };
@@ -304,10 +304,6 @@ angular.module('starter.controllers', ['ngCordova'])
           $state.go('app.group-home');
       });
   });
-
-  $timeout(function() {
-     myPopup.close(); //close the popup after 7 seconds for some reason
-  }, 7000);
  
   };
 
@@ -358,13 +354,13 @@ angular.module('starter.controllers', ['ngCordova'])
         console.log("Total: " + $scope.total);
 
     //pravimo 5 Osoba cija imena imamo.
-    for (let i=0; i<nr_people; i++){
+    for (let k=0; k<nr_people; k++){
       //ime imamo, names[i]
       //dao para
       
-      var status = Math.round( (avg - parseFloat( $scope.arr[i].hasGiven ) )*100)/100; //da li je u plusu ili minusu neko
+      var status = Math.round( (avg - parseFloat( $scope.arr[k].hasGiven ) )*100)/100; //da li je u plusu ili minusu neko
       //polje izbrisan sluzi kada "brisemo" coveka iz $scope.arra
-     	$scope.arr[i].status = status;
+     	$scope.arr[k].status = status;
     }
 
 	/*

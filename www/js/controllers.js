@@ -15,7 +15,7 @@ angular.module('starter.controllers', ['ngCordova'])
 
   $http.get(databaseUrl + "php/all_users.php")
   .success(function (response) {
-		var stringArray = response.split('<');
+		    var stringArray = response.split('<');
         var rec = JSON.parse(stringArray[0]);
         $rootScope.users = rec.records;});
 
@@ -32,16 +32,15 @@ angular.module('starter.controllers', ['ngCordova'])
       
       $http.get(databaseUrl + "php/notifications.php?RECEIVER_ID=2")
                 .success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-		$scope.notifications = rec.records;});
+		                                          var stringArray = response.split('<');
+                                              var rec = JSON.parse(stringArray[0]);
+		                                          $scope.notifications = rec.records;});
 
       $http.get(databaseUrl + "php/upcoming_events.php?id=" + $rootScope.id)
                 .success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-		$scope.upcoming_events = rec.records;});
-
+		                                          var stringArray = response.split('<');
+                                              var rec = JSON.parse(stringArray[0]);
+		                                          $scope.upcoming_events = rec.records;});
 
         $scope.collection = {
             selectedImage : 'img/default_picture.png'
@@ -50,19 +49,16 @@ angular.module('starter.controllers', ['ngCordova'])
         $ionicPlatform.ready(function() {
      
             $scope.getImageSaveContact = function() {       
-                // Image picker will load images according to these settings
                 var options = {
-                    maximumImagesCount: 1, // Max number of selected images, I'm using only one for this example
+                    maximumImagesCount: 1, // Max number of selected images
                     width: 800,
                     height: 800,
-                    quality: 80            // Higher is better
+                    quality: 80            
                 };
      
                 $cordovaImagePicker.getPictures(options).then(function (results) {
-                    // Loop through acquired images
                     for (var i = 0; i < results.length; i++) {
-                        $scope.collection.selectedImage = results[i];   // We loading only one image so we can use it like this
-     
+                        $scope.collection.selectedImage = results[i];   
                         window.plugins.Base64.encodeFile($scope.collection.selectedImage, function(base64){  // Encode URI to Base64 needed for contacts plugin
                             $scope.collection.selectedImage = base64;
                         });
@@ -71,24 +67,18 @@ angular.module('starter.controllers', ['ngCordova'])
                     console.log('Error: ' + JSON.stringify(error));    // In case of error
                 });
             };  
-     
         }); 
      
         $scope.contact = {     // We will use it to save a contact
-
             "photos": [
                 {
                     "type": "base64",
                     "value": $scope.collection.selectedImage
-     
                 }
             ]
         };           
-
     }, 0); 
   };
-
-  $rootScope.refreshHome();
 
   $scope.now=new Date();
 
@@ -104,113 +94,106 @@ angular.module('starter.controllers', ['ngCordova'])
   $scope.day.setHours(17);
   $scope.day.setMinutes(0); 
 
-
+  $rootScope.refreshHome();
 
 })
 
 .controller('GroupHomeCtrl', function($scope, $timeout, $state, $http, $rootScope, $stateParams, $ionicPopover, $cordovaGeolocation, $ionicPopup) {
 	 $scope.data = {
-    productName: ''
-  };
+      productName: ''
+   };
 	
   $rootScope.refreshGroupHome = function(){
 
     setTimeout(function(){
       if($stateParams.id!= '')
-        $scope.groupid=$stateParams.id;
+          $scope.groupid=$stateParams.id;
       else if ($rootScope.last_joined != undefined)
           $scope.groupid=$rootScope.last_joined;
       else 
           $scope.groupid=$rootScope.newest_group.id;
      
       $http.get(databaseUrl + "php/get_group_id.php?id=" + $scope.groupid)
-                .success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-		$scope.group = rec.records;});  
+            .success(function (response) {
+		                                          var stringArray = response.split('<');
+                                              var rec = JSON.parse(stringArray[0]);
+		                                          $scope.group = rec.records;});  
 	    $http.get(databaseUrl + "php/get_group_admin.php?groupid=" + $scope.groupid)
-                .success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-		$scope.admin = rec.records;}); 
+            .success(function (response) {
+		                                          var stringArray = response.split('<');
+                                              var rec = JSON.parse(stringArray[0]);
+		                                          $scope.admin = rec.records;}); 
 	    $http.get(databaseUrl + "php/get_group_members.php?groupid=" + $scope.groupid)
       			.success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-		$scope.members = rec.records;
-											                    $scope.nr_members=$scope.members.length;});
+		                                          var stringArray = response.split('<');
+                                              var rec = JSON.parse(stringArray[0]);
+		                                          $scope.members = rec.records;
+											                        $scope.nr_members=$scope.members.length;});
 	    $http.get(databaseUrl + "php/get_group_products.php?groupid=" + $scope.groupid)
       			.success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
+		                                          var stringArray = response.split('<');
+                                              var rec = JSON.parse(stringArray[0]);
 		$scope.products = rec.records;});
 	    $http.get(databaseUrl + "php/get_group_products_reserved.php?groupid=" + $scope.groupid)
       			.success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-		$scope.products_reserved = rec.records;});
+		                                          var stringArray = response.split('<');
+                                              var rec = JSON.parse(stringArray[0]);
+		                                          $scope.products_reserved = rec.records;});
 		$http.get(databaseUrl + "php/get_group_money.php?id=" + $scope.groupid)
       			.success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-		$scope.moneyData = rec.records;});
-	    
+		                                          var stringArray = response.split('<');
+                                              var rec = JSON.parse(stringArray[0]);
+		                                          $scope.moneyData = rec.records;});  
     }, 0); 
   };
 
-		
 
 	var options = {timeout: 10000, enableHighAccuracy: true};
  
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
  
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
  
-    var mapOptions = {
+  var mapOptions = {
       center: latLng,
       zoom: 12,
       mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+  };
  
-    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-		//Wait until the map is loaded
-   google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+  google.maps.event.addListenerOnce($scope.map, 'idle', function(){
  
-  var marker = new google.maps.Marker({
-      map: $scope.map,
-      animation: google.maps.Animation.DROP,
-      position: latLng
+      var marker = new google.maps.Marker({
+          map: $scope.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+          content: "Your location!"
+      });
+     
+      google.maps.event.addListener(marker, 'click', function () {
+          infoWindow.open($scope.map, marker);
+      });      
   });
 
-  var infoWindow = new google.maps.InfoWindow({
-      content: "Your location!"
-  });
- 
-  google.maps.event.addListener(marker, 'click', function () {
-      infoWindow.open($scope.map, marker);
-  });      
- 
-  });
- 
   }, function(error){
     console.log("Could not get location");
   });
 
-		
 	var template = '<ion-popover-view><ion-header-bar> <h1 class="title">My Popover Title</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
 
   $scope.popover = $ionicPopover.fromTemplate(template, {
     scope: $scope
   });
 
-  // .fromTemplateUrl() method
   $ionicPopover.fromTemplateUrl('my-popover.html', {
     scope: $scope
   }).then(function(popover) {
     $scope.popover = popover;
   });
-
 
   $scope.openPopover = function($event) {
     $scope.popover.show($event);
@@ -231,12 +214,11 @@ angular.module('starter.controllers', ['ngCordova'])
     // Execute action
   });
 
-
 	 $scope.popover2 = $ionicPopover.fromTemplate(template, {
     scope: $scope
   });
 
-  // .fromTemplateUrl() method
+
   $ionicPopover.fromTemplateUrl('my-popover2.html', {
     scope: $scope
   }).then(function(popover) {
@@ -259,14 +241,13 @@ angular.module('starter.controllers', ['ngCordova'])
 
       $http.get(databaseUrl + "php/new_product.php?groupID=" + $scope.groupid + "&productName=" + $scope.data.productName +"")
       .success(function (response) { 
-			    $scope.data.productName = "";
-          $scope.names =$scope.datapointsList;
-          
-          if(typeof $rootScope.refreshGroupHome == 'function')
-                $rootScope.refreshGroupHome();
+                          			    $scope.data.productName = "";
+                                    $scope.names =$scope.datapointsList;
+                                    
+                                    if(typeof $rootScope.refreshGroupHome == 'function')
+                                          $rootScope.refreshGroupHome();
 
-          $state.go('app.group-home');
-      });
+                                    $state.go('app.group-home'); });
   };
 
 
@@ -283,11 +264,10 @@ angular.module('starter.controllers', ['ngCordova'])
         type: 'button-positive',
         onTap: function(e) {
           if (!$scope.data.productPrice) {
-            //don't allow the user to close unless he enters wifi password
             e.preventDefault();
           } else {
             $http.get(databaseUrl + "php/product_set_price.php?productID=" + buyer_info + "&productPrice=" + $scope.data.productPrice +"")
-      .success(function (response) {});
+                  .success(function (response) {});
           }
         }
       }
@@ -296,13 +276,12 @@ angular.module('starter.controllers', ['ngCordova'])
 
   myPopup.then(function(res) {
     console.log('Tapped!', res);
-	 $http.get(databaseUrl + "php/product_set_buyer.php?productID=" + buyer_info + "&buyer_userID=" + $rootScope.id +"")
+      $http.get(databaseUrl + "php/product_set_buyer.php?productID=" + buyer_info + "&buyer_userID=" + $rootScope.id +"")
       .success(function (response) {
-          if(typeof $rootScope.refreshGroupHome == 'function')
-                $rootScope.refreshGroupHome();
+                                    if(typeof $rootScope.refreshGroupHome == 'function')
+                                          $rootScope.refreshGroupHome();
 
-          $state.go('app.group-home');
-      });
+                                    $state.go('app.group-home'); });
   });
  
   };
@@ -329,35 +308,28 @@ angular.module('starter.controllers', ['ngCordova'])
 		$scope.arr=$scope.moneyData;
 		$scope.total = 0;
 			
-			for (var i=0; i<nr_people; i++){
-				var found=0;
-				for(var j=0; j<$scope.arr.length; j++){
-					if($scope.members[i].userid==$scope.arr[j].userid)
-						found=1;
-				}
+		for (var i=0; i<nr_people; i++){
+		var found=0;
+		
+    for(var j=0; j<$scope.arr.length; j++){
+				if($scope.members[i].userid==$scope.arr[j].userid)
+					found=1;
+		}
 
-				if(found==0) {
-					var new_member = $scope.members[i];
-					new_member.groupid = $scope.groupid;
-					new_member.hasGiven=0;
-					$scope.arr.push(new_member); }
-			}
+		if(found==0) {
+				var new_member = $scope.members[i];
+				new_member.groupid = $scope.groupid;
+				new_member.hasGiven=0;
+				$scope.arr.push(new_member); }
+		}
 			
-			for (var i=0; i<$scope.arr.length; i++){
+		for (var i=0; i<$scope.arr.length; i++){
 				$scope.total = Math.round( ($scope.total + parseFloat( $scope.arr[i].hasGiven ) )*100)/100  ;
-			}
+		}
 			
-
-		$scope.total = Number($scope.total).toFixed(2);
 		var avg = $scope.total/nr_people;
-		avg = Number(avg).toFixed(2);
-        console.log("Total: " + $scope.total);
 
-    //pravimo 5 Osoba cija imena imamo.
     for (let k=0; k<nr_people; k++){
-      //ime imamo, names[i]
-      //dao para
-      
       var status = Math.round( (avg - parseFloat( $scope.arr[k].hasGiven ) )*100)/100; //da li je u plusu ili minusu neko
       //polje izbrisan sluzi kada "brisemo" coveka iz $scope.arra
      	$scope.arr[k].status = status;
@@ -401,39 +373,41 @@ angular.module('starter.controllers', ['ngCordova'])
     var i =0;
       //I nacin raskusuravanja, ako tacno ima da se raskusura!!!!
       while(i<$scope.arr.length){
-        while ( i<$scope.arr.length && $scope.arr[i].status==0){
-          i++;
-        }
-        if (i<$scope.arr.length){
-          var person1 = $scope.arr[i];
-        }
-        else {
-          break;
-        }
-        //trazimo onog u $scope.arru koji ima tacno onoliko koliko -person1 da se odmah raskusuraju
-        var j=i;
-        while (j<$scope.arr.length && $scope.arr[j].status!=-person1.status){
-          j++;
-        }
-        if (j<$scope.arr.length){
-          //nasli smo coveka koji ima tacno koliko fali
-          var person2 = $scope.arr[j];
-          //person1 i person2 treba da zamene pare
-          //onaj koji je u plusu treba da da pare
-          if (person1.status>0){
-            console.log(person1.user_email + " should give  " + person1.status + " to " + person2.user_email);
-			var message = person1.user_email + " should give  " + person1.status + " to " + person2.user_email;
-			$scope.messages.push(message);
+          while ( i<$scope.arr.length && $scope.arr[i].status==0){
+            i++;
+          }
+
+          if (i<$scope.arr.length){
+              var person1 = $scope.arr[i];
           }
           else {
-            console.log(person2.user_email + " should give  " + person2.status + " to " + person1.user_email);
-			var message = person2.user_email + " should give  " + person1.status + " to " + person1.user_email;
-			$scope.messages.push(message);
+              break;
           }
-          person1.status = 0;
-          person2.status = 0;
-        }
-        i++;
+            //trazimo onog u $scope.arru koji ima tacno onoliko koliko -person1 da se odmah raskusuraju
+          var j=i;
+          while (j<$scope.arr.length && $scope.arr[j].status!=-person1.status){
+              j++;
+          }
+          if (j<$scope.arr.length){
+              //nasli smo coveka koji ima tacno koliko fali
+              var person2 = $scope.arr[j];
+                  //person1 i person2 treba da zamene pare
+                  //onaj koji je u plusu treba da da pare
+              if (person1.status>0){
+                    console.log(person1.user_email + " should give  " + person1.status + " to " + person2.user_email);
+                    var message = person1.user_email + " should give  " + person1.status + " to " + person2.user_email;
+                    $scope.messages.push(message);
+              }
+              else {
+                    console.log(person2.user_email + " should give  " + person2.status + " to " + person1.user_email);
+              			var message = person2.user_email + " should give  " + person1.status + " to " + person1.user_email;
+              			$scope.messages.push(message);
+              }
+              
+              person1.status = 0;
+              person2.status = 0;
+          }
+          i++;
       }
 //-----------------------------------------------------------------------------------------------------------
       //II nacin za rasrestavanje ukoliko postoji element u $scope.arru kome status != 0
@@ -459,21 +433,22 @@ angular.module('starter.controllers', ['ngCordova'])
             break;
           }
             //trazimo nekog ko ima status<trazimo
-            j=0;
-            while(j<$scope.arr.length && $scope.arr[j].status>-person1.status){
+          j=0;
+          while(j<$scope.arr.length && $scope.arr[j].status>-person1.status){
               j++;
-            }
-            if (j<$scope.arr.length){
+          }
+          if (j<$scope.arr.length){
               //znaci nasli smo nekoga ciji je status<trazimo
-              var person2 = $scope.arr[j];
-              person2.status += person1.status;
-              console.log(person1.user_email + " should give " + person1.status + " to " + person2.user_email);
-			  var message = person1.user_email + " should give  " + person1.status + " to " + person2.user_email;
-			  $scope.messages.push(message);
-              i=-1;
-              person1.status=0;
-            }
-            i++;
+            var person2 = $scope.arr[j];
+            person2.status += person1.status;
+            console.log(person1.user_email + " should give " + person1.status + " to " + person2.user_email);
+			      var message = person1.user_email + " should give  " + person1.status + " to " + person2.user_email;
+			      $scope.messages.push(message);
+            
+            i=-1;
+            person1.status=0;
+          }
+          i++;
         }
       }
 //-----------------------------------------------------------------------------------------------------------
@@ -490,41 +465,39 @@ angular.module('starter.controllers', ['ngCordova'])
         //trazim prvog coveka u minusu i neko ko je u vecem plusu
         i=0;
         while(i<$scope.arr.length){
-          while (i<$scope.arr.length && $scope.arr[i].status>=0){
-            i++;
-          }
-          if (i<$scope.arr.length){
-            var person1 = $scope.arr[i];
-          }
-          else {
-            break;
-          }
-          var trazimo =Math.round( ( -person1.status)*100)/100;
-          //trazimo coveka status>trazimo
-          j=0;
-          while(j<$scope.arr.length && $scope.arr[j].status<trazimo){
-            j++;
-          }
-          if (j<$scope.arr.length){
-            var person2 = $scope.arr[j];
-            console.log(person2.user_email + " should give " + trazimo + " to " + person1.user_email);
-			var message = person2.user_email + " should give  " + trazimo + " to " + person1.user_email;
-			$scope.messages.push(message);
+            while (i<$scope.arr.length && $scope.arr[i].status>=0){
+              i++;
+            }
+            if (i<$scope.arr.length){
+              var person1 = $scope.arr[i];
+            }
+            else {
+              break;
+            }
+            var trazimo =Math.round( ( -person1.status)*100)/100;
+            //trazimo coveka status>trazimo
+            j=0;
+            while(j<$scope.arr.length && $scope.arr[j].status<trazimo){
+              j++;
+            }
+            if (j<$scope.arr.length){
+              var person2 = $scope.arr[j];
+              console.log(person2.user_email + " should give " + trazimo + " to " + person1.user_email);
+  			      var message = person2.user_email + " should give  " + trazimo + " to " + person1.user_email;
+  			      $scope.messages.push(message);
 
-			person2.status = Math.round( ( person2.status -trazimo)*100)/100;
-            person1.status = 0;
-            i=-1;
-          }
-          i++;
+  			      person2.status = Math.round( ( person2.status -trazimo)*100)/100;
+              person1.status = 0;
+              i=-1;
+            }
+            i++;
         }
       }
 
+      if(typeof $rootScope.refreshGroupHome == 'function')
+          $rootScope.refreshGroupHome();
 
-            if(typeof $rootScope.refreshGroupHome == 'function')
-              $rootScope.refreshGroupHome();
-
-            $state.go('app.group-home');
-      
+      $state.go('app.group-home');  
   };
 
   $rootScope.refreshGroupHome();
@@ -537,19 +510,18 @@ angular.module('starter.controllers', ['ngCordova'])
     setTimeout(function(){
       
       $http.get(databaseUrl + "php/all_groups.php")
-      .success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-										$rootScope.groups = rec.records;
-		                                $scope.datapointsList = $rootScope.groups ;
-		                                $scope.names = $rootScope.groups ; });
+              .success(function (response) {
+		                                        var stringArray = response.split('<');
+                                            var rec = JSON.parse(stringArray[0]);
+										                        $rootScope.groups = rec.records;
+        		                                $scope.datapointsList = $rootScope.groups ;
+        		                                $scope.names = $rootScope.groups ; });
     }, 0); 
   };
 
-	
-	 $scope.names=$scope.datapointsList;
-   $scope.adn = {};
-	 $scope.srchchange = function () {
+	$scope.names=$scope.datapointsList;
+  $scope.adn = {};
+	$scope.srchchange = function () {
 
   $scope.names = null;
   var filtervalue = [];
@@ -596,27 +568,27 @@ angular.module('starter.controllers', ['ngCordova'])
           } else {    
             $http.get(databaseUrl + "php/join_group.php?P='" + $scope.data.password + "'&GROUPID=" + $scope.groupid + "&USERID="+ $rootScope.id + "")
             .success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-			  $scope.resu = rec.records;
-              if($scope.resu.ok == '1'){
-              $rootScope.last_joined = $scope.groupid;
+                                    		    var stringArray = response.split('<');
+                                            var rec = JSON.parse(stringArray[0]);
+                                    			  $scope.resu = rec.records;
+                                            
+                                            if($scope.resu.ok == '1'){
+                                                $rootScope.last_joined = $scope.groupid;
 
-              if(typeof $rootScope.refreshGroups == 'function')
-                $rootScope.refreshGroups();
-              if(typeof $rootScope.refreshMyGroups == 'function')
-                $rootScope.refreshMyGroups();
-              if(typeof $rootScope.refreshGroupHome == 'function')
-                $rootScope.refreshGroupHome();
-			        if(typeof $rootScope.refreshHome == 'function')
-                $rootScope.refreshHome();
-
-              $state.go('app.group-home');
-            }
-            else{
-              $scope.showPopup1(groupid);
-            }
-            });
+                                                if(typeof $rootScope.refreshGroups == 'function')
+                                                  $rootScope.refreshGroups();
+                                                if(typeof $rootScope.refreshMyGroups == 'function')
+                                                  $rootScope.refreshMyGroups();
+                                                if(typeof $rootScope.refreshGroupHome == 'function')
+                                                  $rootScope.refreshGroupHome();
+                                  			        if(typeof $rootScope.refreshHome == 'function')
+                                                  $rootScope.refreshHome();
+                                                  
+                                                  $state.go('app.group-home');
+                                            }
+                                            else{
+                                              $scope.showPopup1(groupid);
+                                            }  });
           }
         }
       }
@@ -649,31 +621,29 @@ angular.module('starter.controllers', ['ngCordova'])
           } else {    
             $http.get(databaseUrl + "php/join_group.php?P=" + $scope.data.password + "&GROUPID=" + $scope.groupid + "&USERID="+ $rootScope.id + "")
             .success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-			  $scope.resu = rec.records;
-              if($scope.resu.ok == '1'){
-              $rootScope.last_joined = $scope.groupid;
+                                    		    var stringArray = response.split('<');
+                                            var rec = JSON.parse(stringArray[0]);
+                                    			  $scope.resu = rec.records;
+                                            if($scope.resu.ok == '1'){
+                                                  $rootScope.last_joined = $scope.groupid;
 
-              if(typeof $rootScope.refreshGroups == 'function')
-                $rootScope.refreshGroups();
-              if(typeof $rootScope.refreshMyGroups == 'function')
-                $rootScope.refreshMyGroups();
-              if(typeof $rootScope.refreshGroupHome == 'function')
-                $rootScope.refreshGroupHome();
+                                                  if(typeof $rootScope.refreshGroups == 'function')
+                                                    $rootScope.refreshGroups();
+                                                  if(typeof $rootScope.refreshMyGroups == 'function')
+                                                    $rootScope.refreshMyGroups();
+                                                  if(typeof $rootScope.refreshGroupHome == 'function')
+                                                    $rootScope.refreshGroupHome();
 
-              $state.go('app.group-home');
-            }
-            else{
-              $scope.showPopup1(groupid);
-            }
-            });            
+                                                  $state.go('app.group-home');
+                                            }
+                                            else{
+                                                  $scope.showPopup1(groupid);
+                                            }  });            
           }
         }
       }
     ]
   });
-
  };
 
   $scope.remove = function(group) {
@@ -692,12 +662,9 @@ angular.module('starter.controllers', ['ngCordova'])
       
       $http.get(databaseUrl + "php/my_groups.php?id=" + $rootScope.id)
         .success(function (response) {
-
-				var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-          $scope.my_groups = rec.records;
-        });
-
+                              				var stringArray = response.split('<');
+                                      var rec = JSON.parse(stringArray[0]);
+                                      $scope.my_groups = rec.records; });
     }, 0); 
   };
 
@@ -713,9 +680,9 @@ angular.module('starter.controllers', ['ngCordova'])
   $scope.id = $stateParams.id;
   $http.get(databaseUrl + "php/get.php?id=" + $scope.id)
   .success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-			$scope.user_detail = rec.records;});
+                            		var stringArray = response.split('<');
+                                var rec = JSON.parse(stringArray[0]);
+                            		$scope.user_detail = rec.records; });
 })
 
 .controller("NewGroupCtrl", function($scope, $rootScope, $ionicPlatform, $state, $http, $cordovaDatePicker, $ionicTabsDelegate) {
@@ -728,7 +695,7 @@ angular.module('starter.controllers', ['ngCordova'])
     location: '',
     date: '',
     password: '',
-	description: ''
+	  description: ''
   };
   
   /* 
@@ -762,22 +729,19 @@ angular.module('starter.controllers', ['ngCordova'])
 
       $http.get(databaseUrl + "php/new_group.php?name=" + $scope.data.name + "&password=" + $scope.data.password + "&location=" + $scope.data.location + "&date=" + $scope.data.date + "&userid=" + $rootScope.id +"" + "&description=" + $scope.data.description)
       .success(function (response) {
+                            		    var stringArray = response.split('<');
+                                    var rec = JSON.parse(stringArray[0]);
 
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-          if(typeof $rootScope.refreshGroups == 'function')
-                $rootScope.refreshGroups();
-          if(typeof $rootScope.refreshMyGroups == 'function')
-                $rootScope.refreshMyGroups();
-          if(typeof $rootScope.refreshGroupHome == 'function')
-                $rootScope.refreshGroupHome();
+                                      if(typeof $rootScope.refreshGroups == 'function')
+                                            $rootScope.refreshGroups();
+                                      if(typeof $rootScope.refreshMyGroups == 'function')
+                                            $rootScope.refreshMyGroups();
+                                      if(typeof $rootScope.refreshGroupHome == 'function')
+                                            $rootScope.refreshGroupHome();
 
-          $rootScope.newest_group = rec.records;
-          $state.go('app.group-home');
-      });
-
+                                      $rootScope.newest_group = rec.records;
+                                      $state.go('app.group-home'); });
   };       
-  
 })
 
 .controller("RegisterCtrl", function($scope, $rootScope, $state, $http, $ionicTabsDelegate) {
@@ -793,32 +757,28 @@ angular.module('starter.controllers', ['ngCordova'])
 
       $http.get(databaseUrl + "php/register.php?EMAIL=" + $scope.data.email + "&password="  + $scope.data.password)
       .success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
+                                		var stringArray = response.split('<');
+                                    var rec = JSON.parse(stringArray[0]);
 
-            $rootScope.id = rec.records.id;
-            $rootScope.email = $scope.data.email;
-            $state.go('app.home');
-
-      });
+                                    $rootScope.id = rec.records.id;
+                                    $rootScope.email = $scope.data.email;
+                                    $state.go('app.home'); });
   }; 
 
   $scope.login = function (data) {
 
       $http.get(databaseUrl + "php/login.php?email=" + $scope.data.email + "&password="  + $scope.data.password)
       .success(function (response) {
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-			if(rec.id!=-1){
-				$rootScope.id = rec.records.id;
-           		$rootScope.email = $scope.data.email;
-           		$state.go('app.home');
-			}
-			else
-				$state.go('tab.register');          
-      });
-  };      
-  
+                            		    var stringArray = response.split('<');
+                                    var rec = JSON.parse(stringArray[0]);
+                              			if(rec.id!=-1){
+                              				$rootScope.id = rec.records.id;
+                                         		$rootScope.email = $scope.data.email;
+                                         		$state.go('app.home');
+                              			}
+                              			else
+                              				$state.go('tab.register'); });
+  };        
 })
 
 .controller('LoginCtrl', function($scope, $rootScope, $http, $state){
@@ -832,18 +792,14 @@ angular.module('starter.controllers', ['ngCordova'])
     console.log('login called');
     $http.get(databaseUrl + "php/login.php?EMAIL=" + $scope.data.email)
       .success(function(response){
-		var stringArray = response.split('<');
-        var rec = JSON.parse(stringArray[0]);
-        $rootScope.id = rec.records.id;
-        $state.go('app.home');
-      })
+                            		    var stringArray = response.split('<');
+                                    var rec = JSON.parse(stringArray[0]);
+                                    $rootScope.id = rec.records.id;
+                                    $state.go('app.home'); })
       .error(function(response){
-        console.log('error');
         //should show message and stay on same page
-      });
-
+        console.log('error');  });
   }
-
 });
 
 //Kaljo's database location
